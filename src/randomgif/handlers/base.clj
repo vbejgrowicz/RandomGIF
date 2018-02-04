@@ -4,15 +4,15 @@
 (defn header
   "Function to display HTML Header"
   []
-  [:head
+  [:head (hiccup.page/include-css "styles.css")
    [:meta {:charset "UTF-8"}]
    [:title "Find GIFs"]])
 
 (defn inputForm
   "Function to display HTML Text Input Form"
   []
-  [:div {:class "form"}
-   [:div "Find a GIF!"]
+  [:div {:class "search-form"}
+   [:div {:class "form-header"} "Find a GIF!"]
    [:form {:action "/search" :method "GET"}
     [:input {:id "query"
              :type "text"

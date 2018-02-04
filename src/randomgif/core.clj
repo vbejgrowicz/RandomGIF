@@ -11,6 +11,7 @@
 (defroutes app
   (GET "/" [] base/home)
   (GET "/debug" [] handle-dump)
+  (route/resources "/")
   (route/not-found (html [:h1 "Page Not Found"])))
 
 (defn -main
