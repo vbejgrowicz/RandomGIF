@@ -16,11 +16,17 @@
   [:div {:class "search-form"}
    [:div {:class "form-header"} "Find a GIF!"]
    [:form {:action "/search" :method "GET"}
-    [:input {:id "query"
-             :type "text"
+    [:input {:id "search"
+             :name "input"
+             :type "search"
              :placeholder "Enter Search Term"}]]])
 
 (defn home [request]
   (html5 {:lang "en"}
    (header)
    (inputForm)))
+
+(defn search [request]
+  (html5 {:lang "en"}
+   (header)
+   (searchResults (:params request))))
