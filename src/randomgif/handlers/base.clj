@@ -21,6 +21,21 @@
              :type "search"
              :placeholder "Enter Search Term"}]]])
 
+(defn searchURL
+  ([search limit]
+   (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&limit=" limit))
+  ([search]
+   (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&limit=" "1")))
+
+(defn parseResponse
+  [response]
+  (get (json/read-str (:body response)) "data"))
+
+(defn handleSearch
+  "Function to handle search request"
+  [{input "input"}]
+  (let [response (client/get (searchURL input 10))]
+    (parseResponse response)))
 (defn home [request]
   (html5 {:lang "en"}
    (header)
