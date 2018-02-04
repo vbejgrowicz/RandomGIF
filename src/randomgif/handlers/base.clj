@@ -1,5 +1,7 @@
 (ns randomgif.handlers.base
-  (:require [hiccup.page :refer [html5]]))
+  (:require [hiccup.page :refer [html5]]
+            [clj-http.client :as client]
+            [clojure.data.json :as json]))
 
 (defn header
   "Function to display HTML Header"
