@@ -3,6 +3,7 @@
             [ring.middleware.reload :refer [wrap-reload]]
             [compojure.core :refer :all]
             [compojure.route :as route]
+            [ring.handler.dump :refer [handle-dump]]
             [hiccup.core :refer :all]
             [hiccup.page :refer :all]))
 
@@ -14,6 +15,7 @@
 
 (defroutes app
   (GET "/" [] handler)
+  (GET "/debug" [] handle-dump)
   (route/not-found (html [:h1 "Page Not Found"])))
 
 (defn -main
