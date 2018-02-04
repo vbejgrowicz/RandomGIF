@@ -2,17 +2,19 @@
   (:require [ring.adapter.jetty :as jetty]
             [ring.middleware.reload :refer [wrap-reload]]
             [compojure.core :refer :all]
-            [compojure.route :as route]))
+            [compojure.route :as route]
+            [hiccup.core :refer :all]
+            [hiccup.page :refer :all]))
 
 (defn handler [request]
   "Function to handle basic HTTP request"
   {:status 200
-   :body "Welcome to the RandomGIF App!"
+   :body (html [:h1#header "Welcome to RandomGIF App!"])
    :headers {}})
 
 (defroutes app
   (GET "/" [] handler)
-  (route/not-found "<h1>Page Not Found</h1>"))
+  (route/not-found (html [:h1 "Page Not Found"])))
 
 (defn -main
   "The entry point for the RandomGIF App"
