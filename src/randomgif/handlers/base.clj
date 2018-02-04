@@ -21,6 +21,11 @@
              :type "search"
              :placeholder "Enter Search Term"}]]])
 
+(defn displayGIF
+  [gif]
+  [:li
+   [:img {:src (get (get (get gif "images") "fixed_height_downsampled") "url")}]])
+
 (defn searchURL
   ([search limit]
    (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&limit=" limit))
@@ -36,6 +41,14 @@
   [{input "input"}]
   (let [response (client/get (searchURL input 10))]
     (parseResponse response)))
+
+(defn searchResults
+  "Function to display Search Results"
+  [search]
+  (let [results (handleSearch search)]
+    [:ul
+      (map (fn [each] (displayGIF each)) results)]))
+
 (defn home [request]
   (html5 {:lang "en"}
    (header)
