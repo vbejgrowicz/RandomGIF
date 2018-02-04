@@ -5,16 +5,11 @@
             [compojure.route :as route]
             [ring.handler.dump :refer [handle-dump]]
             [hiccup.core :refer :all]
-            [hiccup.page :refer :all]))
-
-(defn handler [request]
-  "Function to handle basic HTTP request"
-  {:status 200
-   :body (html [:h1#header "Welcome to RandomGIF App!"])
-   :headers {}})
+            [hiccup.page :refer :all]
+            [randomgif.handlers.base :as base]))
 
 (defroutes app
-  (GET "/" [] handler)
+  (GET "/" [] base/handler)
   (GET "/debug" [] handle-dump)
   (route/not-found (html [:h1 "Page Not Found"])))
 
