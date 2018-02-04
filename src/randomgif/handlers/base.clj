@@ -1,9 +1,24 @@
 (ns randomgif.handlers.base
-  (:require [hiccup.core :refer :all]
-            [hiccup.page :refer :all]))
+  (:require [hiccup.page :refer [html5]]))
 
-(defn handler [request]
-  "Function to handle basic HTTP request"
-  {:status 200
-   :body (html [:h1#header "Welcome to RandomGIF App!"])
-   :headers {}})
+(defn header
+  "Function to display HTML Header"
+  []
+  [:head
+   [:meta {:charset "UTF-8"}]
+   [:title "Find GIFs"]])
+
+(defn inputForm
+  "Function to display HTML Text Input Form"
+  []
+  [:div {:class "form"}
+   [:div "Find a GIF!"]
+   [:form {:action "/search" :method "GET"}
+    [:input {:id "query"
+             :type "text"
+             :placeholder "Enter Search Term"}]]])
+
+(defn home [request]
+  (html5 {:lang "en"}
+   (header)
+   (inputForm)))

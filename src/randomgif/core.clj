@@ -9,7 +9,7 @@
             [randomgif.handlers.base :as base]))
 
 (defroutes app
-  (GET "/" [] base/handler)
+  (GET "/" [] base/home)
   (GET "/debug" [] handle-dump)
   (route/not-found (html [:h1 "Page Not Found"])))
 
