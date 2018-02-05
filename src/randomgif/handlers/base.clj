@@ -14,12 +14,12 @@
   "Function to display HTML Text Input Form"
   []
   [:div {:class "search-form"}
-   [:div {:class "form-header"} "Find a GIF!"]
+   [:h1 "Find GIFs!"]
    [:form {:action "/search" :method "POST"}
-    [:input {:id "search"
-             :name "input"
-             :type "search"
-             :placeholder "Enter Search Term"}]]])
+      [:input {:id "search"
+               :name "input"
+               :type "search"
+               :placeholder "Enter Search Term"}]]])
 
 (defn displayGIF
   [gif]
