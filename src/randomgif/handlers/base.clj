@@ -24,8 +24,10 @@
 
 (defn displayGIF
   [gif]
-  [:li
-   [:img {:src (get (get (get gif "images") "fixed_height_downsampled") "url")}]])
+  (if (empty? (get gif "images"))
+    [:img {:src (get gif "fixed_height_downsampled_url")}]
+    [:li
+      [:img {:src (get (get (get gif "images") "fixed_height_downsampled") "url")}]]))
 
 (defn searchURL
   ([search limit]
