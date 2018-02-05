@@ -1,7 +1,8 @@
 (ns randomgif.handlers.base
   (:require [hiccup.page :refer [html5]]
             [clj-http.client :as client]
-            [clojure.data.json :as json]))
+            [clojure.data.json :as json]
+            [clojure.string :as string]))
 
 (defn header
   "Function to display HTML Header"
@@ -42,12 +43,18 @@
   (let [response (client/get (searchURL input 10))]
     (parseResponse response)))
 
+(defn capitalize-words
+  "Function to capitilize first letter of each word"
+  [string]
+  (string/join " " (map string/capitalize (string/split string #" "))))
+
 (defn searchResults
   "Function to display Search Results"
   [search]
   (let [results (handleSearch search)]
-    [:ul
-      (map (fn [each] (displayGIF each)) results)]))
+    [:h1 (capitalize-words (get search "input"))
+      [:ul
+        (map (fn [each] (displayGIF each)) results)]]))
 
 (defn home [request]
   (html5 {:lang "en"}
