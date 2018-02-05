@@ -29,9 +29,11 @@
 
 (defn searchURL
   ([search limit]
-   (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&limit=" limit))
+   (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&rating=g&lang=en&limit=" limit))
   ([search]
-   (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&limit=" "1")))
+   (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&rating=g&lang=en"))
+  ([]
+   (str "http://api.giphy.com/v1/gifs/random?&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&rating=g&lang=en")))
 
 (defn parseResponse
   [response]
@@ -39,9 +41,12 @@
 
 (defn handleSearch
   "Function to handle search request"
-  [{input "input"}]
-  (let [response (client/get (searchURL input 10))]
-    (parseResponse response)))
+  ([{input "input"}]
+   (let [response (client/get (searchURL input))]
+     (parseResponse response)))
+  ([]
+   (let [response (client/get (searchURL))]
+     (parseResponse response))))
 
 (defn capitalize-words
   "Function to capitilize first letter of each word"
