@@ -66,7 +66,8 @@
 (defn home [request]
   (html5 {:lang "en"}
    (header)
-   (inputForm)))
+   (inputForm)
+   (displayGIF (handleSearch))))
 
 (defn search [request]
   (html5 {:lang "en"}
