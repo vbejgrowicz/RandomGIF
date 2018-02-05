@@ -59,9 +59,12 @@
   "Function to display Search Results"
   [search]
   (let [results (handleSearch search)]
-    [:h1 (capitalize-words (get search "input"))
-      [:ul
-        (map (fn [each] (displayGIF each)) results)]]))
+    [:div
+      [:h1 (capitalize-words (get search "input"))]
+      (if (empty? results)
+        [:div "No matches found"]
+        [:ul
+          (map (fn [each] (displayGIF each)) results)])]))
 
 (defn home [request]
   (html5 {:lang "en"}
