@@ -1,10 +1,18 @@
-# RandomGIF
+# findGIFs
+A Clojure App to find GIFs.
 
-A Clojure library designed to fetch random GIFs.
+## Getting Started
+1.  Clone this repository:
 
-## License
+  `$ git clone https://github.com/vbejgrowicz/findGIFs`
 
-Copyright © 2018 FIXME
+2.  Navigate to the project directory.
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+  `$ cd findGIFs`
+
+3.  Run the Clojure app with [Leiningen](https://leiningen.org/).
+
+  `$ lein run`
+
+4.  View app in browser at http://localhost:8000/.
+
