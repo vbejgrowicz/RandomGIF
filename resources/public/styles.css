@@ -34,4 +34,14 @@ input[type="search"] {
   background-color: #F6F6F6;
 }
 
+ul {
+  justify-content: center;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+li {
+  height: 200px;
+  padding: 5px;
 }
