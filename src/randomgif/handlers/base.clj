@@ -15,7 +15,7 @@
   []
   [:div {:class "search-form"}
    [:div {:class "form-header"} "Find a GIF!"]
-   [:form {:action "/search" :method "GET"}
+   [:form {:action "/search" :method "POST"}
     [:input {:id "search"
              :name "input"
              :type "search"

@@ -11,10 +11,10 @@
 
 (defroutes app
   (GET "/" [] base/home)
-  (GET "/search" [] base/search)
   (GET "/debug" [] handle-dump)
   (route/resources "/")
   (route/not-found (html [:h1 "Page Not Found"])))
+  (POST "/search" [req] base/search)
 
 (defn -main
   "The entry point for the RandomGIF App"
