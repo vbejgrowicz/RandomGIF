@@ -7,7 +7,7 @@
 (defn header
   "Function to display HTML Header"
   []
-  [:head (hiccup.page/include-css "styles.css")
+  [:head (hiccup.page/include-css "styles.css") (hiccup.page/include-js "app.js")
    [:meta {:charset "UTF-8"}]
    [:title "Find GIFs"]])
 
@@ -16,7 +16,7 @@
   []
   [:div {:class "search-form"}
    [:h1 "Find GIFs!"]
-   [:form {:action "/search" :method "POST"}
+   [:form {:id "myform" :action "/search" :method "POST"}
       [:input {:id "search"
                :name "input"
                :type "search"
