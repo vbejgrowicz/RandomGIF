@@ -33,7 +33,8 @@
   [gif]
   [:img {:src (get-GIF-src gif)}])
 
-(defn searchURL
+(defn gif-api
+  "Function to fetch gifs based on input"
   ([search limit]
    (str "http://api.giphy.com/v1/gifs/search?q=" search "&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&rating=g&lang=en&limit=" limit))
   ([search]
@@ -42,29 +43,40 @@
    (str "http://api.giphy.com/v1/gifs/random?&api_key=Yk5zrWe68FsF56yeZkDNMvZHIdM7ePbh&rating=g&lang=en")))
 
 (defn parseResponse
+  "Function to parse JSON response"
   [response]
-  (get (json/read-str (:body response)) "data"))
+  (-> response
+      :body
+      json/read-str
+      (get "data")))
 
-(defn handleSearch
-  "Function to handle search request"
-  ([{input "input"}]
-   (let [response (client/get (searchURL input))]
-     (parseResponse response)))
+(defn fetch-gifs
+  "Function to fetch GIFs and return parsed response"
+  ([input]
+   (-> input
+       gif-api
+       client/get
+       parseResponse))
   ([]
-   (let [response (client/get (searchURL))]
-     (parseResponse response))))
+   (->
+       (gif-api)
+       client/get
+       parseResponse)))
 
 (defn capitalize-words
   "Function to capitilize first letter of each word"
   [string]
-  (string/join " " (map string/capitalize (string/split string #" "))))
+  (-> string
+      (string/split #" ")
+      (->> (map string/capitalize)
+           (string/join " "))))
 
 (defn searchResults
   "Function to display Search Results"
-  [search]
-  (let [results (handleSearch search)]
+  [input]
+  (let [results (fetch-gifs input)]
     [:div
-      [:h1 (capitalize-words (get search "input"))]
+      [:h1 (capitalize-words input)]
       (if (empty? results)
         [:div "No matches found"]
         [:ul
@@ -74,9 +86,9 @@
   (html5 {:lang "en"}
    (header)
    (inputForm)
-   (displayGIF (handleSearch))))
+   (displayGIF (fetch-gifs))))
 
 (defn search [request]
   (html5 {:lang "en"}
    (header)
-   (searchResults (:params request))))
+   (searchResults (get (:params request) "input"))))
