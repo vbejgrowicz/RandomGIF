@@ -6,9 +6,8 @@
             [compojure.route :as route]
             [ring.handler.dump :refer [handle-dump]]
             [ring.util.response :refer [redirect]]
-            [hiccup.core :refer :all]
-            [hiccup.page :refer :all]
-            [randomgif.handlers.base :as base]))
+            [randomgif.handlers.base :as base]
+            [randomgif.handlers.search :as search]))
 
 (defn redirect-unknown-route
   [request]
@@ -16,8 +15,8 @@
 
 (defroutes app
   (route/resources "/")
-  (GET "/" [req] base/home)
-  (POST "/search" [req] base/search)
+  (GET "/" [req] base/page)
+  (POST "/search" [req] search/page)
   (GET "/debug" [req] handle-dump)
   (ANY "*" [req] redirect-unknown-route))
 
