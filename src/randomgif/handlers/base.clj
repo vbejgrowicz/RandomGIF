@@ -22,6 +22,13 @@
                :type "search"
                :placeholder "Enter Search Term"}]]])
 
+(defn get-GIF-src
+  [gif]
+  (-> gif
+    (get "images")
+    (get "fixed_height_downsampled")
+    (get "url")))
+
 (defn displayGIF
   [gif]
   (if (empty? (get gif "images"))
