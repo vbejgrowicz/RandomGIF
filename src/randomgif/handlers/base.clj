@@ -31,10 +31,7 @@
 
 (defn displayGIF
   [gif]
-  (if (empty? (get gif "images"))
-    [:img {:src (get gif "fixed_height_downsampled_url")}]
-    [:li
-      [:img {:src (get (get (get gif "images") "fixed_height_downsampled") "url")}]]))
+  [:img {:src (get-GIF-src gif)}])
 
 (defn searchURL
   ([search limit]
@@ -71,7 +68,7 @@
       (if (empty? results)
         [:div "No matches found"]
         [:ul
-          (map (fn [each] (displayGIF each)) results)])]))
+          (map (fn [each] [:li (displayGIF each)]) results)])]))
 
 (defn home [request]
   (html5 {:lang "en"}
