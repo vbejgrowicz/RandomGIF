@@ -11,8 +11,11 @@ function saveToLocalStorage(input) {
   if (localStorage) {
       const currentStorage = localStorage.getItem('gifsearch');
       if (currentStorage) {
-        let newStorage = JSON.parse(currentStorage);
-        newStorage.push(input);
+        let parsed = JSON.parse(currentStorage);
+        if (!parsed.includes(input)) {
+          parsed.unshift(input);
+        }
+        let newStorage = parsed.slice(0, 5);
         localStorage.setItem('gifsearch', JSON.stringify(newStorage));
       } else {
         localStorage.setItem('gifsearch', JSON.stringify([input]))
